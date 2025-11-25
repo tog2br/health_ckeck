@@ -142,15 +142,15 @@ header h1 {
 
 .summary {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
 }
 
 .summary-card {
     background: var(--card-bg);
-    border-radius: 8px;
-    padding: 16px;
+    border-radius: 6px;
+    padding: 12px;
     text-align: center;
     box-shadow: var(--shadow);
     border: 1px solid var(--border-color);
@@ -163,25 +163,26 @@ header h1 {
 }
 
 .summary-card.total {
-    border-top: 3px solid var(--primary-color);
+    border-top: 2px solid var(--primary-color);
 }
 
 .summary-card.healthy {
-    border-top: 3px solid var(--success-color);
+    border-top: 2px solid var(--success-color);
 }
 
 .summary-card.unhealthy {
-    border-top: 3px solid var(--warning-color);
+    border-top: 2px solid var(--warning-color);
 }
 
 .summary-card.error {
-    border-top: 3px solid var(--error-color);
+    border-top: 2px solid var(--error-color);
 }
 
 .summary-value {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 700;
     margin-bottom: 4px;
+    line-height: 1.2;
 }
 
 .summary-card.total .summary-value {
@@ -202,9 +203,10 @@ header h1 {
 
 .summary-label {
     color: var(--text-secondary);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
+    line-height: 1.2;
 }
 
 .last-update {
