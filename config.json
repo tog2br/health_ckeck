@@ -1,0 +1,31 @@
+{
+  "refreshInterval": 30000,
+  "timeout": 5000,
+  "services": [
+    {
+      "name": "API Principal",
+      "url": "https://www.google.com/",
+      "category": "Backend",
+      "expectedStatus": 200
+    },
+    {
+      "name": "API de Autenticação",
+      "url": "https://auth.exemplo.com/health",
+      "category": "Backend",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Serviço de Notificações",
+      "url": "https://notifications.exemplo.com/health",
+      "category": "Serviços",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Banco de Dados",
+      "url": "https://db.exemplo.com/health",
+      "category": "Infraestrutura",
+      "expectedStatus": 200
+    }
+  ]
+}
+

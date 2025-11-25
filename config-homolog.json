@@ -1,0 +1,31 @@
+{
+  "refreshInterval": 30000,
+  "timeout": 5000,
+  "services": [
+    {
+      "name": "API Principal - Homolog",
+      "url": "https://api-homolog.exemplo.com/health",
+      "category": "Backend",
+      "expectedStatus": 200
+    },
+    {
+      "name": "API de Autenticação - Homolog",
+      "url": "https://auth-homolog.exemplo.com/health",
+      "category": "Backend",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Serviço de Notificações - Homolog",
+      "url": "https://notifications-homolog.exemplo.com/health",
+      "category": "Serviços",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Banco de Dados - Homolog",
+      "url": "https://db-homolog.exemplo.com/health",
+      "category": "Infraestrutura",
+      "expectedStatus": 200
+    }
+  ]
+}
+

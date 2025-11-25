@@ -1,0 +1,31 @@
+{
+  "refreshInterval": 30000,
+  "timeout": 5000,
+  "services": [
+    {
+      "name": "API Principal - Produção",
+      "url": "https://api.exemplo.com/health",
+      "category": "Backend",
+      "expectedStatus": 200
+    },
+    {
+      "name": "API de Autenticação - Produção",
+      "url": "https://auth.exemplo.com/health",
+      "category": "Backend",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Serviço de Notificações - Produção",
+      "url": "https://notifications.exemplo.com/health",
+      "category": "Serviços",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Banco de Dados - Produção",
+      "url": "https://db.exemplo.com/health",
+      "category": "Infraestrutura",
+      "expectedStatus": 200
+    }
+  ]
+}
+
