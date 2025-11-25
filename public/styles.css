@@ -245,14 +245,14 @@ header h1 {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
 }
 
 .service-card {
     background: rgba(30, 41, 59, 0.6);
-    border-radius: 8px;
-    padding: 20px;
+    border-radius: 6px;
+    padding: 12px;
     border: 1px solid var(--border-color);
     transition: all 0.3s ease;
     position: relative;
@@ -285,7 +285,7 @@ header h1 {
 }
 
 .service-card:hover {
-    transform: translateX(4px);
+    transform: translateY(-2px);
     border-color: var(--primary-color);
     box-shadow: 0 4px 12px -2px rgba(99, 102, 241, 0.2);
 }
@@ -293,27 +293,38 @@ header h1 {
 .service-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 12px;
+    align-items: center;
+    margin-bottom: 8px;
+    gap: 8px;
 }
 
-.service-name {
-    font-size: 1.1rem;
+.service-name-link {
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--text-primary);
+    text-decoration: none;
     flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
+
+.service-name-link:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
 }
 
 .service-status {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
+    justify-content: center;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.85rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    min-width: 24px;
+    flex-shrink: 0;
 }
 
 .service-status.healthy {
@@ -331,26 +342,20 @@ header h1 {
     color: var(--error-color);
 }
 
-.service-url {
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    margin-bottom: 12px;
-    word-break: break-all;
-    font-family: 'Courier New', monospace;
-}
-
 .service-details {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     color: var(--text-secondary);
+    gap: 8px;
 }
 
 .response-time {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 2px;
+    font-size: 0.75rem;
 }
 
 .response-time.fast {
@@ -367,6 +372,7 @@ header h1 {
 
 .status-code {
     font-weight: 600;
+    font-size: 0.75rem;
 }
 
 .status-code.healthy {

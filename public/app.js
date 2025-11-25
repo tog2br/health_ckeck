@@ -51,22 +51,21 @@ function createServiceCard(service) {
     return `
         <div class="service-card ${statusClass}">
             <div class="service-header">
-                <div class="service-name">${service.name}</div>
+                <a href="${service.url}" target="_blank" class="service-name-link" title="${service.url}">
+                    ${service.name}
+                </a>
                 <span class="service-status ${statusClass}">
                     ${service.status === 'healthy' ? '✓' : service.status === 'unhealthy' ? '⚠' : '✗'}
-                    ${service.status === 'healthy' ? 'Operacional' : service.status === 'unhealthy' ? 'Problema' : 'Erro'}
                 </span>
             </div>
-            <div class="service-url">${service.url}</div>
             <div class="service-details">
                 <div class="response-time ${responseTimeClass}">
                     ⏱ ${formatResponseTime(service.responseTime)}
                 </div>
                 <div class="status-code ${statusClass}">
-                    Status: ${service.statusCode || 'N/A'}
+                    ${service.statusCode || 'N/A'}
                 </div>
             </div>
-            ${service.message ? `<div style="margin-top: 8px; font-size: 0.8rem; color: var(--text-secondary);">${service.message}</div>` : ''}
         </div>
     `;
 }
