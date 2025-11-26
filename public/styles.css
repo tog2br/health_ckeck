@@ -96,30 +96,31 @@ header h1 {
     background: var(--primary-color);
     color: white;
     border: none;
-    padding: 0;
+    padding: 0 !important;
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     box-shadow: var(--shadow);
-    width: 140px;
-    height: 44px;
-    min-width: 140px;
-    max-width: 140px;
-    min-height: 44px;
-    max-height: 44px;
+    width: 140px !important;
+    height: 44px !important;
+    min-width: 140px !important;
+    max-width: 140px !important;
+    min-height: 44px !important;
+    max-height: 44px !important;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    box-sizing: border-box;
-    display: inline-flex;
+    box-sizing: border-box !important;
+    display: inline-flex !important;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     position: relative;
-    line-height: 1;
+    line-height: 1 !important;
     vertical-align: middle;
+    margin: 0 !important;
 }
 
 .btn-refresh:hover {
@@ -132,16 +133,23 @@ header h1 {
 }
 
 .btn-refresh.loading {
-    background: #6366f1;
-    cursor: not-allowed;
-    width: 140px;
-    height: 44px;
-    min-width: 140px;
-    max-width: 140px;
-    min-height: 44px;
-    max-height: 44px;
-    opacity: 1;
+    background: #6366f1 !important;
+    cursor: not-allowed !important;
+    width: 140px !important;
+    height: 44px !important;
+    min-width: 140px !important;
+    max-width: 140px !important;
+    min-height: 44px !important;
+    max-height: 44px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+    opacity: 1 !important;
     animation: pulse 1.5s ease-in-out infinite;
+    box-sizing: border-box !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 @keyframes pulse {
@@ -538,6 +546,14 @@ header h1 {
     padding: 40px;
     color: var(--text-secondary);
     font-size: 1.1rem;
+}
+
+/* Exceção: botão não deve ser afetado pelas regras gerais de .loading */
+.btn-refresh.loading {
+    text-align: center !important;
+    padding: 0 !important;
+    font-size: 1rem !important;
+    color: white !important;
 }
 
 .loading::after {
