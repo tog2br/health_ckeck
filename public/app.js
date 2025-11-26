@@ -73,9 +73,9 @@ function createServiceCard(service, index = 0) {
                 </a>
                 <div class="service-header-right">
                     ${hasComponents ? `
-                        <div class="info-icon-wrapper">
+                        <div class="info-icon-wrapper" onmouseenter="showComponentsPopup(this)" onmouseleave="hideComponentsPopup(this)">
                             <div class="info-icon" title="Detalhes do Health Check">ℹ️</div>
-                            <div class="components-popup">
+                            <div class="components-popup" onmouseenter="showComponentsPopup(this.closest('.info-icon-wrapper'))" onmouseleave="hideComponentsPopup(this.closest('.info-icon-wrapper'))">
                                 <div class="components-header">Componentes</div>
                                 <div class="components-list">${componentsHtml}</div>
                             </div>
@@ -294,5 +294,38 @@ document.addEventListener('visibilitychange', () => {
         fetchHealthStatus();
     }
 });
+
+// Funções para controlar o popup de componentes
+const popupTimeouts = new Map();
+
+function showComponentsPopup(wrapper) {
+    if (wrapper) {
+        // Cancelar timeout anterior se existir
+        const timeoutId = popupTimeouts.get(wrapper);
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+            popupTimeouts.delete(wrapper);
+        }
+        
+        const popup = wrapper.querySelector('.components-popup');
+        if (popup) {
+            popup.style.display = 'block';
+        }
+    }
+}
+
+function hideComponentsPopup(wrapper) {
+    if (wrapper) {
+        const popup = wrapper.querySelector('.components-popup');
+        if (popup) {
+            // Delay para permitir movimento do mouse para o popup
+            const timeoutId = setTimeout(() => {
+                popup.style.display = 'none';
+                popupTimeouts.delete(wrapper);
+            }, 200);
+            popupTimeouts.set(wrapper, timeoutId);
+        }
+    }
+}
 
 
