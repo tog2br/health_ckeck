@@ -68,6 +68,17 @@ public class HttpHealthCheckRepository implements HealthCheckRepository {
                 isHealthy = false;
             }
             
+            // Verificar se algum componente está diferente de UP
+            if (result.getComponents() != null && !result.getComponents().isEmpty()) {
+                for (Component component : result.getComponents()) {
+                    String componentStatus = component.getStatus();
+                    if (componentStatus != null && !"UP".equalsIgnoreCase(componentStatus)) {
+                        isHealthy = false;
+                        break; // Já encontrou um componente com problema, não precisa continuar
+                    }
+                }
+            }
+            
             result.setStatus(isHealthy ? "healthy" : "unhealthy");
             result.setMessage(isHealthy ? "Operacional" : "Status " + statusCode);
             
