@@ -100,23 +100,30 @@ header h1 {
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
     box-shadow: var(--shadow);
+    min-width: 140px;
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
 }
 
 .btn-refresh:hover {
     background: #4f46e5;
-    transform: translateY(-2px);
     box-shadow: 0 6px 12px -2px rgba(99, 102, 241, 0.4);
 }
 
 .btn-refresh:active {
-    transform: translateY(0);
+    transform: none;
 }
 
 .btn-refresh.loading {
     opacity: 0.7;
     cursor: not-allowed;
+    min-width: 140px;
+    max-width: 140px;
 }
 
 .auto-refresh {
@@ -298,6 +305,29 @@ header h1 {
     align-items: center;
     margin-bottom: 8px;
     gap: 8px;
+    position: relative;
+}
+
+.service-header-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.info-icon-wrapper {
+    position: relative;
+}
+
+.info-icon {
+    cursor: pointer;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    user-select: none;
+}
+
+.info-icon:hover {
+    opacity: 1;
 }
 
 .service-name-link {
@@ -387,6 +417,61 @@ header h1 {
 
 .status-code.error {
     color: var(--error-color);
+}
+
+.info-icon-wrapper .components-popup {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px;
+    min-width: 200px;
+    max-width: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    display: none;
+    margin-top: 4px;
+}
+
+.info-icon-wrapper:hover .components-popup {
+    display: block;
+}
+
+.components-header {
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 6px;
+}
+
+.components-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.component-item {
+    font-size: 0.75rem;
+    padding: 4px 0;
+    color: var(--text-secondary);
+}
+
+.component-item.comp-up {
+    color: var(--success-color);
+}
+
+.component-item.comp-down {
+    color: var(--error-color);
+}
+
+.component-item.comp-unknown {
+    color: var(--warning-color);
 }
 
 .loading {

@@ -66,8 +66,15 @@ if [ ! -d "public" ]; then
     exit 1
 fi
 
-echo "🔨 Compilando servidor..."
-javac HealthCheckServer.java
+echo "🔨 Compilando servidor (Clean Architecture)..."
+echo ""
+
+# Criar diretório de classes se não existir
+mkdir -p target/classes
+
+# Compilar todos os arquivos Java
+find src/main/java -name "*.java" > /tmp/sources.txt
+javac -d target/classes -encoding UTF-8 @/tmp/sources.txt
 
 if [ $? -ne 0 ]; then
     echo "❌ Erro ao compilar!"
@@ -82,5 +89,5 @@ echo "📝 Pressione Ctrl+C para parar o servidor"
 echo ""
 
 # Executar o servidor
-java HealthCheckServer
+java -cp target/classes br.com.healthcheck.infrastructure.server.HealthCheckServer
 

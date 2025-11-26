@@ -42,12 +42,15 @@ javac -version
 ./compile.sh
 ```
 
-Ou manualmente:
+O script irá:
+- Compilar todos os arquivos Java da estrutura Clean Architecture
+- Criar o diretório `target/classes` com os arquivos compilados
+- Executar o servidor
 
-```bash
-javac HealthCheckServer.java
-java HealthCheckServer
-```
+**Estrutura de compilação:**
+- Código fonte: `src/main/java/br/com/healthcheck/`
+- Classes compiladas: `target/classes/`
+- Classe principal: `br.com.healthcheck.infrastructure.server.HealthCheckServer`
 
 3. **Acesse o dashboard**: `http://localhost:3000`
 
@@ -158,8 +161,37 @@ O dashboard atualiza automaticamente a cada intervalo configurado. Você pode:
 
 - **Backend**: Java 8+ (bibliotecas padrão: com.sun.net.httpserver, java.net)
 - **Frontend**: HTML5 + CSS3 + JavaScript (Vanilla)
+- **Arquitetura**: Clean Architecture com separação de responsabilidades
 - **Sem dependências externas**: Funciona apenas com JDK padrão!
 - **Suporte a múltiplos ambientes**: Homologação e Produção
+
+## 🏗️ Arquitetura
+
+O projeto segue os princípios de **Clean Architecture** com as seguintes camadas:
+
+```
+src/main/java/br/com/healthcheck/
+├── domain/              # Camada de Domínio (regras de negócio)
+│   ├── entity/          # Entidades de domínio
+│   ├── repository/     # Interfaces de repositório
+│   └── usecase/         # Casos de uso
+├── data/                # Camada de Dados
+│   └── repository/      # Implementações de repositório
+├── presentation/         # Camada de Apresentação
+│   ├── dto/             # Data Transfer Objects
+│   └── handler/          # Handlers HTTP
+└── infrastructure/       # Camada de Infraestrutura
+    ├── config/          # Configurações
+    ├── server/          # Servidor HTTP
+    └── util/            # Utilitários (JSON parser)
+```
+
+### Princípios Aplicados
+
+- **Separação de Responsabilidades**: Cada camada tem uma responsabilidade específica
+- **Dependency Inversion**: Camadas externas dependem de interfaces definidas nas camadas internas
+- **Testabilidade**: Fácil de testar cada camada isoladamente
+- **Manutenibilidade**: Código organizado e fácil de entender
 
 ## 📝 Notas
 

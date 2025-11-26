@@ -44,9 +44,26 @@ function formatDate(dateString) {
 }
 
 // Função para criar card de serviço
-function createServiceCard(service) {
+function createServiceCard(service, index = 0) {
     const statusClass = service.status;
     const responseTimeClass = getResponseTimeClass(service.responseTime);
+    
+    // Verificar se tem componentes de health check
+    const hasComponents = service.healthDetails && 
+                         service.healthDetails.components && 
+                         Array.isArray(service.healthDetails.components) &&
+                         service.healthDetails.components.length > 0;
+    
+    let componentsHtml = '';
+    if (hasComponents) {
+        const components = service.healthDetails.components;
+        componentsHtml = components.map(comp => {
+            const compStatus = comp.status || 'UNKNOWN';
+            const statusIcon = compStatus === 'UP' ? '✓' : compStatus === 'DOWN' ? '✗' : '?';
+            const statusClass = compStatus === 'UP' ? 'comp-up' : compStatus === 'DOWN' ? 'comp-down' : 'comp-unknown';
+            return `<div class="component-item ${statusClass}">${comp.name || 'Unknown'}: ${statusIcon} ${compStatus}</div>`;
+        }).join('');
+    }
     
     return `
         <div class="service-card ${statusClass}">
@@ -54,9 +71,20 @@ function createServiceCard(service) {
                 <a href="${service.url}" target="_blank" class="service-name-link" title="${service.url}">
                     ${service.name}
                 </a>
-                <span class="service-status ${statusClass}">
-                    ${service.status === 'healthy' ? '✓' : service.status === 'unhealthy' ? '⚠' : '✗'}
-                </span>
+                <div class="service-header-right">
+                    ${hasComponents ? `
+                        <div class="info-icon-wrapper">
+                            <div class="info-icon" title="Detalhes do Health Check">ℹ️</div>
+                            <div class="components-popup">
+                                <div class="components-header">Componentes</div>
+                                <div class="components-list">${componentsHtml}</div>
+                            </div>
+                        </div>
+                    ` : ''}
+                    <span class="service-status ${statusClass}">
+                        ${service.status === 'healthy' ? '✓' : service.status === 'unhealthy' ? '⚠' : '✗'}
+                    </span>
+                </div>
             </div>
             <div class="service-details">
                 <div class="response-time ${responseTimeClass}">
@@ -92,19 +120,19 @@ function renderServices(data) {
         const healthyCount = services.filter(s => s.status === 'healthy').length;
         const totalCount = services.length;
         
-        html += `
-            <div class="category-section">
-                <div class="category-title">
-                    ${category}
-                    <span style="font-size: 0.9rem; color: var(--text-secondary); font-weight: normal;">
-                        (${healthyCount}/${totalCount} operacionais)
-                    </span>
-                </div>
-                <div class="services-grid">
-                    ${services.map(service => createServiceCard(service)).join('')}
-                </div>
-            </div>
-        `;
+                html += `
+                    <div class="category-section">
+                        <div class="category-title">
+                            ${category}
+                            <span style="font-size: 0.9rem; color: var(--text-secondary); font-weight: normal;">
+                                (${healthyCount}/${totalCount} operacionais)
+                            </span>
+                        </div>
+                        <div class="services-grid">
+                            ${services.map((service, index) => createServiceCard(service, index)).join('')}
+                        </div>
+                    </div>
+                `;
     });
     
     servicesContainer.innerHTML = html;
@@ -266,4 +294,5 @@ document.addEventListener('visibilitychange', () => {
         fetchHealthStatus();
     }
 });
+
 
