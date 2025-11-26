@@ -96,7 +96,7 @@ header h1 {
     background: var(--primary-color);
     color: white;
     border: none;
-    padding: 12px 24px;
+    padding: 0;
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
@@ -105,6 +105,10 @@ header h1 {
     box-shadow: var(--shadow);
     width: 140px;
     height: 44px;
+    min-width: 140px;
+    max-width: 140px;
+    min-height: 44px;
+    max-height: 44px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -113,6 +117,7 @@ header h1 {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    position: relative;
 }
 
 .btn-refresh:hover {
@@ -129,11 +134,36 @@ header h1 {
     cursor: not-allowed;
     width: 140px;
     height: 44px;
+    min-width: 140px;
+    max-width: 140px;
+    min-height: 44px;
+    max-height: 44px;
 }
 
 .btn-refresh:disabled {
     opacity: 0.7;
     cursor: not-allowed;
+    width: 140px;
+    height: 44px;
+    min-width: 140px;
+    max-width: 140px;
+    min-height: 44px;
+    max-height: 44px;
+}
+
+/* Garantir que o conteúdo interno não mude o tamanho */
+.btn-refresh > * {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Prevenir que a animação de loading afete o botão */
+.btn-refresh.loading::after {
+    display: none;
+    content: none;
 }
 
 .auto-refresh {
@@ -497,6 +527,12 @@ header h1 {
 .loading::after {
     content: '...';
     animation: dots 1.5s steps(4, end) infinite;
+}
+
+/* Exceção: botão não deve ter os pontos animados */
+.btn-refresh.loading::after {
+    display: none !important;
+    content: none !important;
 }
 
 @keyframes dots {
