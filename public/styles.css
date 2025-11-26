@@ -52,7 +52,8 @@ header h1 {
     display: flex;
     align-items: center;
     gap: 20px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    min-height: 44px;
 }
 
 .environment-selector {
@@ -100,14 +101,18 @@ header h1 {
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
     box-shadow: var(--shadow);
-    min-width: 140px;
-    max-width: 140px;
+    width: 140px;
+    height: 44px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
 .btn-refresh:hover {
@@ -122,8 +127,13 @@ header h1 {
 .btn-refresh.loading {
     opacity: 0.7;
     cursor: not-allowed;
-    min-width: 140px;
-    max-width: 140px;
+    width: 140px;
+    height: 44px;
+}
+
+.btn-refresh:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
 }
 
 .auto-refresh {
@@ -232,6 +242,8 @@ header h1 {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    position: relative;
+    z-index: 1;
 }
 
 .category-section {
@@ -265,7 +277,7 @@ header h1 {
     border: 1px solid var(--border-color);
     transition: all 0.3s ease;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .service-card::before {
@@ -421,20 +433,21 @@ header h1 {
 
 .info-icon-wrapper .components-popup {
     position: absolute;
-    top: 100%;
+    bottom: 100%;
     right: 0;
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
+    background: rgba(15, 23, 42, 0.98);
+    border: 1px solid rgba(99, 102, 241, 0.3);
     border-radius: 8px;
     padding: 12px;
-    min-width: 200px;
-    max-width: 300px;
+    min-width: 220px;
+    max-width: 320px;
     max-height: 300px;
     overflow-y: auto;
-    z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    z-index: 10000;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
     display: none;
-    margin-top: 4px;
+    margin-bottom: 8px;
+    backdrop-filter: blur(10px);
 }
 
 .info-icon-wrapper:hover .components-popup {
@@ -446,7 +459,7 @@ header h1 {
     font-size: 0.85rem;
     margin-bottom: 8px;
     color: var(--text-primary);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
     padding-bottom: 6px;
 }
 
@@ -457,9 +470,10 @@ header h1 {
 }
 
 .component-item {
-    font-size: 0.75rem;
-    padding: 4px 0;
-    color: var(--text-secondary);
+    font-size: 0.8rem;
+    padding: 6px 0;
+    color: var(--text-primary);
+    font-weight: 500;
 }
 
 .component-item.comp-up {
