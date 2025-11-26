@@ -101,7 +101,7 @@ header h1 {
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
     box-shadow: var(--shadow);
     width: 140px;
     height: 44px;
@@ -118,6 +118,8 @@ header h1 {
     justify-content: center;
     flex-shrink: 0;
     position: relative;
+    line-height: 1;
+    vertical-align: middle;
 }
 
 .btn-refresh:hover {
@@ -130,7 +132,7 @@ header h1 {
 }
 
 .btn-refresh.loading {
-    opacity: 0.7;
+    background: #6366f1;
     cursor: not-allowed;
     width: 140px;
     height: 44px;
@@ -138,10 +140,20 @@ header h1 {
     max-width: 140px;
     min-height: 44px;
     max-height: 44px;
+    opacity: 1;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        background: #6366f1;
+    }
+    50% {
+        background: #818cf8;
+    }
 }
 
 .btn-refresh:disabled {
-    opacity: 0.7;
     cursor: not-allowed;
     width: 140px;
     height: 44px;
@@ -149,6 +161,7 @@ header h1 {
     max-width: 140px;
     min-height: 44px;
     max-height: 44px;
+    opacity: 1;
 }
 
 /* Garantir que o conteúdo interno não mude o tamanho */
@@ -158,12 +171,15 @@ header h1 {
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
 }
 
 /* Prevenir que a animação de loading afete o botão */
 .btn-refresh.loading::after {
-    display: none;
-    content: none;
+    display: none !important;
+    content: none !important;
 }
 
 .auto-refresh {
